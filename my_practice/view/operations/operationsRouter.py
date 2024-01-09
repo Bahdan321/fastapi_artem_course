@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from db.models.trade import Trade
+from view.operations.schemas import Trade
 
 operations_router = APIRouter(prefix="/operations")
 
@@ -12,5 +12,10 @@ fake_trades = [
 ]
 
 
-@operations_router.post()
+@operations_router.post("/")
 async def add_trades(trades: List[Trade]):
+    fake_trades.extend(trades)
+    return {
+        "status": 200,
+        "data": fake_trades,
+    }
