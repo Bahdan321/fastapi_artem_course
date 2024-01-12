@@ -3,7 +3,7 @@ import os
 from envparse import Env
 
 load_dotenv()
-env = Env()
+# env = Env()
 
 DB_HOST = os.environ.get("DB_HOST")
 DB_PORT = os.environ.get("DB_PORT")

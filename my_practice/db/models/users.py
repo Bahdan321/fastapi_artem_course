@@ -1,16 +1,10 @@
+from db.base import Base
+
 from datetime import datetime
 from sqlalchemy import JSON, MetaData, Table, Column, Integer, String, TIMESTAMP, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
 
 metadata = MetaData()
-
-roles = Table(
-    "roles",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("name", String, nullable=False),
-    Column("premissions", JSON),
-
-)
 
 users = Table(
     "users",
@@ -24,3 +18,20 @@ users = Table(
 
 
 )
+
+class Roles(Base):
+
+    metadata,
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(nullable=False)
+    premissions: Mapped[JSON]
+
+class Users(Base):
+
+    metadata,
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(nullable=False)
+    username: Mapped[str] = mapped_column(nullable=False)
+    password: Mapped[str] = mapped_column(nullable=False)
+    registered_at: Mapped[TIMESTAMP] = mapped_column(default=datetime.utcnow)
+    role_id: Mapped[str] = mapped_column(ForeignKey("user.id"))
