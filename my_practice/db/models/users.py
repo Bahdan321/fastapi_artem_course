@@ -1,8 +1,9 @@
 from db.base import Base
 
 from datetime import datetime
-from sqlalchemy import JSON, MetaData, Table, Column, Integer, String, TIMESTAMP, ForeignKey
+from sqlalchemy import JSON, MetaData, Integer, String, TIMESTAMP, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
+from typing import Optional
 
 metadata = MetaData()
 
@@ -10,7 +11,7 @@ class Roles(Base):
 
     metadata,
     name: Mapped[str] = mapped_column(nullable=False)
-    premissions: Mapped[JSON]
+    premissions: Mapped[Optional[dict[list]]] = mapped_column(type_=JSON)
 
 class Users(Base):
 
