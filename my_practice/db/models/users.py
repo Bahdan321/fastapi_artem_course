@@ -1,8 +1,9 @@
 from db.base import Base
 
-from datetime import datetime
-from sqlalchemy import JSON, MetaData, Integer, String, TIMESTAMP, ForeignKey
+import datetime
+from sqlalchemy import JSON, MetaData, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.sql import func
 from typing import Optional
 
 metadata = MetaData()
@@ -19,5 +20,7 @@ class Users(Base):
     email: Mapped[str] = mapped_column(nullable=False)
     username: Mapped[str] = mapped_column(nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
-    registered_at: Mapped[TIMESTAMP] = mapped_column(default=datetime.utcnow)
+    registered_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
     role_id: Mapped[str] = mapped_column(ForeignKey("user.id"))
