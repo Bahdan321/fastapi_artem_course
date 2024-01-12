@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from sqlalchemy import JSON, MetaData, Table, Column, Integer, String, TIMESTAMP, ForeignKey
 
 metadata = MetaData()
@@ -14,6 +14,7 @@ roles = Table(
 
 users = Table(
     "users",
+    metadata,
     Column("id", Integer, primary_key=True),
     Column("email", String, nullable=False),
     Column("username", String, nullable=False),
