@@ -12,7 +12,10 @@ class Roles(Base):
 
     metadata,
     name: Mapped[str] = mapped_column(nullable=False)
-    premissions: Mapped[Optional[dict[list]]] = mapped_column(type_=JSON)
+    permissions: Mapped[Optional[dict[list]]] = mapped_column(type_=JSON)
+    
+    def __repr__(self) -> str:
+        return f"Roles(id={self.id!r},name={self.name!r}, permissions={self.permissions!r})"
 
 class Users(Base):
 
@@ -24,3 +27,6 @@ class Users(Base):
         DateTime(timezone=True), server_default=func.now()
     )
     role_id: Mapped[str] = mapped_column(ForeignKey("user.id"))
+
+    def __repr__(self) -> str:
+        return f"Users(id={self.id!r}, username={self.username!r}, password={self.password!r}, registered_at={self.registered_at!r})"
