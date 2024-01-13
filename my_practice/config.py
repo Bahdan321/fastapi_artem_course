@@ -1,9 +1,7 @@
 from dotenv import load_dotenv
 import os
-from envparse import Env
 
 load_dotenv()
-# env = Env()
 
 DB_HOST = os.environ.get("DB_HOST")
 DB_PORT = os.environ.get("DB_PORT")
